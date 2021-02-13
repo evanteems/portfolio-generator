@@ -68,11 +68,18 @@ const promptProject = portfolioData => {
 };
 
 promptUser()
-.then(answers => console.log(answers))
 .then(promptProject)
+.then(portfolioData => {
+  console.log(portfolioData);
+})
 .then(projectAnswers => console.log(projectAnswers))
 .then(projectData => {
   portfolioData.projects.push(projectData);
+  if (projectData.confirmAddProject) {
+    return promptProject(portfolioData);
+  } else {
+    return portfolioData;
+  }
 });
 
 //const fs = require('fs');
